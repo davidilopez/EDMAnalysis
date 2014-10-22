@@ -21,14 +21,13 @@ require("psych")
 require("irr")
 
 # Load databases from csv files
-timbre.raw <- read.csv("data/timbre.csv")  # Timbre Experiment 1 data
-timbre.WPC.raw <- read.csv("data/timbreWPC.csv")  # Timbre Experiment 2 data
+timbre.raw <- read.csv("data/timbre.csv")  # Timbre Sim Experiment 1 data
+timbre.WPC.raw <- read.csv("data/timbreWPC.csv")  # Timbre Sim Experiment 2 data
 
-general.raw <- read.csv("data/general.csv")  # General Experiment 3 data
+general.raw <- read.csv("data/general.csv")  # General Sim Experiment 3 data
 
-rhythm.raw <- read.csv("data/rhythm.csv")  # Rhythm Experiment 3 data
+rhythm.raw <- read.csv("data/rhythm.csv")  # Rhythm Sim Experiment 3 data
 
 
 ## Experiment 1 -----------------------------------------------------------------
-
 
