@@ -5,7 +5,7 @@
 descriptives <- function(data, raw=TRUE, conf.1.rm = FALSE, tracknames = TRUE, polarize=FALSE, selection = "LONG") {
         require("psych")
 #         Load the pair list.
-        source("tracklist.R")
+        source("functions/tracklist.R")
         if (selection != "LONG") {
                 tracklist <- tracklist[c(7, 17, 21, 39, 47, 53, 59, 62, 94, 111, 119, 149, 151, 176, 178, 184, 188, 190),]
         }
@@ -14,13 +14,13 @@ descriptives <- function(data, raw=TRUE, conf.1.rm = FALSE, tracknames = TRUE, p
 #         descriptive statistics to the unchanged data.
         if (raw == T) {
 #                Load helper functions
-                source("reliability.check.R")
-                source("clean.data.R")
+                source("functions/reliability.check.R")
+                source("functions/clean.data.R")
 #                 Run the data through the functions
 #                 Remove unreliable cases
-                reliable.data <- reliability.check(data)
+#                 reliable.data <- reliability.check(data)
 #                 Clean and format the remaining cases
-                clean.data <- clean.data.subjectwise(raw.data=reliable.data, conf.1.rm=conf.1.rm, polarize=polarize)
+                clean.data <- clean.data.subjectwise(raw.data=data, conf.1.rm=conf.1.rm, polarize=polarize)
                 desc <- as.data.frame(describe(clean.data))
         } else {
                 desc <- as.data.frame(describe(data))

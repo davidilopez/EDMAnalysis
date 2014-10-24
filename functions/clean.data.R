@@ -45,7 +45,7 @@ clean.data.pairwise <- function(raw.data, conf.1.rm = FALSE, tracknames = FALSE,
         }
         #         Load the pair list and merge it with the database
         if (tracknames == TRUE) {
-                source("tracklist.R")
+                source("functions/tracklist.R")
                 merge(x=tracklist, y=tdata, by="PairNumber")
         } else {
                 tdata

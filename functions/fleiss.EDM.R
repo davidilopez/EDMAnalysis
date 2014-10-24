@@ -1,10 +1,13 @@
-fleiss.EDM <- function(data, is.raw = TRUE, conf.1.rm = FALSE, polarize = FALSE, iterations = 1000, min.ratings = 3, selection = "LONG"){
+fleiss.EDM <- function(data, is.raw = TRUE, conf.1.rm = FALSE, rel = FALSE, polarize = FALSE, iterations = 1000, min.ratings = 3, selection = "LONG"){
         require("irr")
         require('psych')
-        source("clean.data.R")
-        source("reliability.check.R")
+        source("functions/clean.data.R")
+        source("functions/reliability.check.R")
         if (is.raw == TRUE) {
-                dt <- clean.data.subjectwise(reliability.check(data), conf.1.rm=conf.1.rm, polarize=polarize)
+                if (rel == TRUE) {
+                        data <- reliability.check(data)
+                }
+                dt <- clean.data.subjectwise(data, conf.1.rm=conf.1.rm, polarize=polarize)
                 if (selection != "LONG") {
                         dt <- dt[,c(7, 17, 21, 39, 47, 53, 59, 62, 94, 111, 119, 149, 151, 176, 178, 184, 188, 190)]
                 }
