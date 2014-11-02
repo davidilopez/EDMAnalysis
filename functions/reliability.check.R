@@ -4,18 +4,19 @@
 # from the database. The output is in the same format as the input, without said
 # cases.
 reliability.check <- function(database, threshold = "normal") {
-        if (threshold == "normal") {      
-                database[((database$Reliability.check == database$Reliability.check.1) | 
-                                  (database$Reliability.check == 1 & database$Reliability.check.1 == 2) |
-                                  (database$Reliability.check == 2 & database$Reliability.check.1 == 1) |
-                                  (database$Reliability.check == 2 & database$Reliability.check.1 == 3) |
-                                  (database$Reliability.check == 3 & database$Reliability.check.1 == 2) |
-                                  (database$Reliability.check == 3 & database$Reliability.check.1 == 4) |
-                                  (database$Reliability.check == 4 & database$Reliability.check.1 == 3) | 
-                                  is.na(database$Reliability.check)),]
-        } else if (threshold == "heavy"){
-                database[database$Reliability.check == database$Reliability.check.1,]
-        }
+#         if (threshold == "normal") {      
+#                 database[((database$Reliability.check == database$Reliability.check.1) | 
+#                                   (database$Reliability.check == 1 & database$Reliability.check.1 == 2) |
+#                                   (database$Reliability.check == 2 & database$Reliability.check.1 == 1) |
+#                                   (database$Reliability.check == 2 & database$Reliability.check.1 == 3) |
+#                                   (database$Reliability.check == 3 & database$Reliability.check.1 == 2) |
+#                                   (database$Reliability.check == 3 & database$Reliability.check.1 == 4) |
+#                                   (database$Reliability.check == 4 & database$Reliability.check.1 == 3) | 
+#                                   is.na(database$Reliability.check)),]
+#         } else if (threshold == "heavy"){
+#                 database[database$Reliability.check == database$Reliability.check.1,]
+#         }
+        return(database)
 }
 
 # ------------------------------------------------------------------------------
