@@ -36,8 +36,8 @@ rhythm.clean.4 <-clean.data.subjectwise(rhythm.raw)
 rhythm.clean.2 <-clean.data.subjectwise(rhythm.raw, polarize = TRUE)
 
 
-## Experiment 1 -----------------------------------------------------------------
-# Calculate the Fleiss' Kappa of the timbre similarity ratings for all the pairs.
+# # Experiment 1 -----------------------------------------------------------------
+# # Calculate the Fleiss' Kappa of the timbre similarity ratings for all the pairs.
 # timbre.kappa.4.E1 <- fleiss.EDM(data = timbre.raw, polarize = FALSE)  # 4pt scale
 # timbre.kappa.2.E1 <- fleiss.EDM(data = timbre.raw, polarize = TRUE)  # 2pt scale
 
@@ -58,8 +58,8 @@ timbre.topSD.2 <- timbre.desc.sorted.2[1:20,]
 timbre.bottomSD.4 <- timbre.desc.sorted.4[171:190,]
 timbre.bottomSD.2 <- timbre.desc.sorted.2[171:190,]
 
-# For the pairs in both extremes, we perform a Fleiss' Kappa analysis to know 
-# how the agreement in each side affects the overall similarity result.
+# # For the pairs in both extremes, we perform a Fleiss' Kappa analysis to know 
+# # how the agreement in each side affects the overall similarity result.
 # timbre.fleiss.top20.4 <- fleiss.EDM(data = timbre.clean.4[,timbre.topSD.4$PairNumber], is.raw = F)
 # timbre.fleiss.top20.2 <- fleiss.EDM(data = timbre.clean.2[,timbre.topSD.2$PairNumber], is.raw = F)
 # 
@@ -115,9 +115,20 @@ timbre.HL.bottom.2 <- HiLo(timbre.bottomSD.2, 1.5)
 rhythm.HL.bottom.2 <- HiLo(rhythm.desc.subset.bottom.2, 1.5)
 table.bottom.2 <- cbind(timbre.bottomSD.2[,1:3], timbre.HL.bottom.2, rhythm.HL.bottom.2)
 
+# Get confidence levels form timbre similarity ratings
+timbre.conf <- confidence.values(raw.data = timbre.raw)
+timbre.conf.desc <- describe(timbre.conf)
+
+# Get confidence levels form rhythm similarity ratings
+rhythm.conf <- confidence.values(raw.data = rhythm.raw)
+rhythm.conf.desc <- describe(rhythm.conf)
+
 ## Experiment 2-----------------------------------------------------------------
 timbre.WPC.desc.4 <- descriptives(data = timbre.WPC.raw, raw = T, selection = "SHORT")
 timbre.WPC.desc.2 <- descriptives(data = timbre.WPC.raw, raw = T, selection = "SHORT", polarize = T)
+
+kappam.fleiss(clean.data.pairwise(raw.data = timbre.WPC.raw, polarize = F))
+kappam.fleiss(clean.data.pairwise(raw.data = timbre.WPC.raw, polarize = T))
 
 
 ## Experiment 3-----------------------------------------------------------------
@@ -129,11 +140,11 @@ general.clean.2 <- clean.data.subjectwise(raw.data = general.raw, polarize = T)
 kappam.fleiss(ratings = t(general.clean.4))
 kappam.fleiss(ratings = t(general.clean.2))
 
-# Test with Kappa the 18 selected pairs of timbre similarity
-fleiss.EDM(data = timbre.raw, is.raw = T, selection = "SHORT", polarize = F)
-fleiss.EDM(data = timbre.raw, is.raw = T, selection = "SHORT", polarize = T)
+# # Test with Kappa the 18 selected pairs of timbre similarity
+# fleiss.EDM(data = timbre.raw, is.raw = T, selection = "SHORT", polarize = F)
+# fleiss.EDM(data = timbre.raw, is.raw = T, selection = "SHORT", polarize = T)
 
-# Check if timbre and general are from the same population
+# Check if timbre and general are from the same population (Wilcoxon rank sum test)
 timbre.general.wilc.4 <- wilcoxon.loop(data.1 = timbre.sel.clean.4, data.2 = general.clean.4)
 timbre.general.wilc.2 <- wilcoxon.loop(data.1 = timbre.sel.clean.2, data.2 = general.clean.2)
 
@@ -151,10 +162,10 @@ fleiss.EDM(data = timbre.sel.clean.2, is.raw = F)
 fleiss.EDM(data = rhythm.sel.clean.4, is.raw = F)
 fleiss.EDM(data = rhythm.sel.clean.2, is.raw = F)
 
-# Check if timbre and rhythm are from the same population
+# Check if timbre and rhythm are from the same population (Wilcoxon rank sum test)
 timbre.rhythm.wilc.4 <- wilcoxon.loop(data.1 = timbre.sel.clean.4, data.2 = rhythm.sel.clean.4)
 timbre.rhythm.wilc.2 <- wilcoxon.loop(data.1 = timbre.sel.clean.2, data.2 = rhythm.sel.clean.2)
 
-# Check if rhythm and general are from the same population
+# Check if rhythm and general are from the same population (Wilcoxon rank sum test)
 general.rhythm.wilc.4 <- wilcoxon.loop(data.1 = general.clean.4, data.2 = rhythm.sel.clean.4)
 general.rhythm.wilc.2 <- wilcoxon.loop(data.1 = general.clean.2, data.2 = rhythm.sel.clean.2)
